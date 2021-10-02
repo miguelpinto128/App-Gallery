@@ -1,0 +1,40 @@
+<div class="margin">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-3 ">
+    <a class="navbar-brand" [routerLink]="'.'">
+      <fa-icon [icon]="iconFontAwesome"  size="lg"></fa-icon>
+    </a>
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+      &#9776;
+    </button>
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" style="justify-content: space-between;">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="favorites" (click)="isMenuCollapsed = true">Favorites</a>
+        </li>
+      </ul>
+      <div>
+        <div class="input-group">
+          <input class="form-control mr-sm-2" [(ngModel)]="search" type="text" placeholder="Search" />
+          <button class="btn my-2 my-sm-0 btn-outline-light"
+            (click)="search != '' ? detail(search) : triggerModal(modalData)">
+            Search</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<ng-template #modalData let-modal>
+  <div class="modal-header">
+    <h6 class="modal-title">Search Error</h6>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Please provide a valid search text</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>

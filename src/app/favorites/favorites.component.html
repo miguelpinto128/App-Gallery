@@ -1,0 +1,37 @@
+<div class="container ">
+    <div class="row pb-5 mb-4 witdh">
+        <div class=" col-lg-3 col-md-4 col-sm-6 col-6 mb-4 mb-lg-0 "
+            *ngFor="let f of favorites | paginate: { itemsPerPage: 24, currentPage: p }">
+            <div class="card rounded shadow-lg border-0 mb-5 ">
+                <div class="card-body p-4 ">
+                    <a class="decoration" [routerLink]="['/details-search',f.id]">
+                        <img src="{{f.imagem}}" class="img-product d-block mb-3" alt="Imagem">
+                        <div class="row center height">
+                            <div class="col-lg-10 col-md-10 discription_size">
+                                <h5 class="card-title" *ngIf="f.description != '' ">
+                                    {{f.description.substr(0,15)}}
+                                    <span *ngIf="f.description.length > 15">...</span>
+                                </h5>
+                                <h5 class="card-title" *ngIf="f.description == '' ">
+                                    {{f.alt_description.substr(0,15)}}
+                                    <span *ngIf="f.alt_description.length > 15">...</span>
+                                </h5>
+                                <p class="card-text">{{ f.created_at | date: "dd/MM/yyyy" }}</p>
+                                <button class="btn btn-light">
+                                    <fa-icon [icon]="iconFontAwesome"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<pagination-controls (pageChange)="p = $event" maxSize="0" previousLabel="" nextLabel=""></pagination-controls>
+
+<div class="end ">
+    <button class="up rounded-circle"  (click)="scrollToTop()">
+      <fa-icon [icon]="up"></fa-icon>
+    </button>
+  </div>
